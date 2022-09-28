@@ -18,7 +18,8 @@ echo "Gathering Codefresh On-Premises Information:"
 # No filename was passed. Use default config file.
 #test $CF_API_KEY && return $CF_API_KEY
 if [ -z "$CFCONFIG" ]; then
-  CFCONFIG=${1:-~/.cfconfig}
+  CFCONFIG='~/.cfconfig'
+  echo "CFCONFIG env variable not found, using default config file ~/.cfconfig"
 fi
 if yq --help | grep -q  'https://github.com/mikefarah/yq/'; then
   #echo "yq command is present, continuing"
