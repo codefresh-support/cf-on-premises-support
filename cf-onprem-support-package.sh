@@ -83,7 +83,20 @@ do
 done
 
 echo "Getting Pods:"
+
+#old labels
 for POD in $(kubectl get pods -n $NAMESPACE -l 'app in (cf-cfapi, dind, cf-builder, cf-cf-broadcaster, cf-cfapi, cf-cfsign, cf-cfui, cf-chartmuseum, cf-charts-manager, cf-cluster-providers, cf-consul, cf-consul-ui, cf-context-manager, cronus, cf-gitops-dashboard-manager, cf-helm-repo-manager, cf-hermes, cf-ingress-controller, cf-ingress-http-backend, cf-k8s-monitor, cf-kube-integration, cf-nats, cf-nomios, cf-pipeline-manager, cf-postgresql, cf-rabbitmq, cf-redis, cf-registry, cf-runner, cf-runtime-environment-manager, cf-store, mongodb)' --no-headers -o custom-columns=":metadata.name")
+do
+  mkdir -p pods/$POD
+  echo " - $POD"
+  kubectl get pods $POD -n $NAMESPACE -o yaml >> pods/$POD/get.yaml
+  kubectl describe pods $POD -n $NAMESPACE >> pods/$POD/describe.txt
+  echo "   ↳ Fetching $POD logs..."
+  kubectl logs $POD -n $NAMESPACE --all-containers >> pods/$POD/logs.log
+done
+
+#new labels
+for POD in $(kubectl get pods -n $NAMESPACE -l 'app.kubernetes.io/name in (argo-hub-platform, builder, cf-broadcaster, cf-broadcaster, cf-broadcaster, cfapi, cfapi, cfsign, cfui, chartmuseum, charts-manager, cluster-providers, codefresh, consul, consul, context-manager, cronus, gitops-dashboard-manager, helm-repo-manager, hermes, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, k8s-monitor, kube-integration, mongodb, mongodb, nats, nats, nomios, pipeline-manager, platform-analytics, postgresql, postgresql, rabbitmq, rabbitmq, redis, redis, redis-platform-analytics, redis-platform-analytics, runner, runtime-environment-manager, system-etl-postgres, tasker-kubernetes)'  --no-headers -o custom-columns=":metadata.name")
 do
   mkdir -p pods/$POD
   echo " - $POD"
