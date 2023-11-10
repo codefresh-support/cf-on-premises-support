@@ -74,7 +74,7 @@ do
   kubectl get persistentvolumeclaim $PVC -n $NAMESPACE -o yaml > persistentVolumeClaim/$PVC/get.yaml
   kubectl describe persistentvolumeclaim $PVC -n $NAMESPACE > persistentVolumeClaim/$PVC/describe.txt
   echo " - $PVC"
-  PV=$(kubectl get persistentvolumeclaim -ncodefresh $PVC  --no-headers -o custom-columns=":spec.volumeName")
+  PV=$(kubectl get persistentvolumeclaim -n $NAMESPACE $PVC --no-headers -o custom-columns=":spec.volumeName")
   mkdir -p persistentVolume/$PV
   kubectl get persistentvolume $PV -o wide >> persistentVolume-list.txt
   kubectl get persistentvolume $PV -o yaml > persistentVolume/$PV/get.yaml
