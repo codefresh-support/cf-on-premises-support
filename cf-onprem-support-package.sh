@@ -96,7 +96,7 @@ do
 done
 
 #new labels
-for POD in $(kubectl get pods -n $NAMESPACE -l 'app.kubernetes.io/name in (argo-hub-platform, builder, cf-broadcaster, cf-broadcaster, cf-broadcaster, cfapi, cfapi, cfsign, cfui, chartmuseum, charts-manager, cluster-providers, codefresh, consul, consul, context-manager, cronus, gitops-dashboard-manager, helm-repo-manager, hermes, ingress-nginx, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, k8s-monitor, kube-integration, mongodb, mongodb, nats, nats, nomios, pipeline-manager, platform-analytics, postgresql, postgresql, rabbitmq, rabbitmq, redis, redis, redis-platform-analytics, redis-platform-analytics, runner, runtime-environment-manager, system-etl-postgres, tasker-kubernetes)'  --no-headers -o custom-columns=":metadata.name")
+for POD in $(kubectl get pods -n $NAMESPACE -l 'app.kubernetes.io/name in (argo-hub-platform, builder, cf-broadcaster, cf-broadcaster, cf-broadcaster, cfapi, cfsign, cfui, chartmuseum, charts-manager, cluster-providers, codefresh, consul, consul, context-manager, cronus, gitops-dashboard-manager, helm-repo-manager, hermes, ingress-nginx, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, internal-gateway, k8s-monitor, kube-integration, mongodb, mongodb, nats, nats, nomios, pipeline-manager, platform-analytics, postgresql, postgresql, rabbitmq, rabbitmq, redis, redis, redis-platform-analytics, redis-platform-analytics, runner, runtime-environment-manager, system-etl-postgres, tasker-kubernetes)'  --no-headers -o custom-columns=":metadata.name")
 do
   mkdir -p pods/$POD
   echo " - $POD"
